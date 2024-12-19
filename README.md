@@ -25,10 +25,8 @@ Copy the [version.dll](https://github.com/jadis0x/DevourX/releases) file to the 
 
 
 ## Contact
-> Discord: Jadis0x
->
-> 
-> Steam: Jadis0x
+- Discord: Jadis0x
+- Steam: Jadis0x
 
 <br>
 
