@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="user\main.cpp">
+      <Filter>user</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\dllmain.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\helpers.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\il2cpp-init.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\pch-il2cpp.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Core.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\version.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Utilities\Utilities.cpp">
+      <Filter>Core\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Players\PlayerManager.cpp">
+      <Filter>Core\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Settings\Settings.cpp">
+      <Filter>Core\Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\imgui\imgui.cpp">
+      <Filter>framework\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\imgui\imgui_draw.cpp">
+      <Filter>framework\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\imgui\imgui_impl_dx11.cpp">
+      <Filter>framework\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\imgui\imgui_impl_win32.cpp">
+      <Filter>framework\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\imgui\imgui_tables.cpp">
+      <Filter>framework\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\imgui\imgui_widgets.cpp">
+      <Filter>framework\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Dx11.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\detours\detours.cpp">
+      <Filter>framework\detours</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\detours\disasm.cpp">
+      <Filter>framework\detours</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\detours\modules.cpp">
+      <Filter>framework\detours</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Hooks\DirectX.cpp">
+      <Filter>Core\Hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GUI\Menu.cpp">
+      <Filter>Core\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Utilities\Keybinds.cpp">
+      <Filter>Core\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GUI\GUITheme.cpp">
+      <Filter>Core\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Hooks\InitHooks.cpp">
+      <Filter>Core\Hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GUI\Tabs\SettingsTAB.cpp">
+      <Filter>Core\GUI\Tabs</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GUI\Tabs\GameplayTAB.cpp">
+      <Filter>Core\GUI\Tabs</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Misc\Misc.cpp">
+      <Filter>Core\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GUI\Tabs\PlayerTAB.cpp">
+      <Filter>Core\GUI\Tabs</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GUI\Tabs\EntitiesTAB.cpp">
+      <Filter>Core\GUI\Tabs</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\RiftHTTP\RiftHTTP.cpp">
+      <Filter>framework\RiftHTTP</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GUI\Tabs\HooksTAB.cpp">
+      <Filter>Core\GUI\Tabs</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GUI\Tabs\ObjectPoolTAB.cpp">
+      <Filter>Core\GUI\Tabs</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="user\main.h">
+      <Filter>user</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\helpers.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\il2cpp-appdata.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\il2cpp-init.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\pch-il2cpp.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Core.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\version.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Utilities\Utilities.h">
+      <Filter>Core\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Players\PlayerManager.h">
+      <Filter>Core\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\UnityResolver.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Settings\Settings.h">
+      <Filter>Core\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\imgui\imconfig.h">
+      <Filter>framework\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\imgui\imgui.h">
+      <Filter>framework\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\imgui\imgui_impl_dx11.h">
+      <Filter>framework\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\imgui\imgui_impl_win32.h">
+      <Filter>framework\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\imgui\imgui_internal.h">
+      <Filter>framework\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\imgui\imstb_rectpack.h">
+      <Filter>framework\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\imgui\imstb_textedit.h">
+      <Filter>framework\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\imgui\imstb_truetype.h">
+      <Filter>framework\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Dx11.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\detours\detours.h">
+      <Filter>framework\detours</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Hooks\DirectX.h">
+      <Filter>Core\Hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GUI\Menu.h">
+      <Filter>Core\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Utilities\Keybinds.h">
+      <Filter>Core\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GUI\GUITheme.h">
+      <Filter>Core\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Hooks\InitHooks.h">
+      <Filter>Core\Hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GUI\Tabs\SettingsTAB.h">
+      <Filter>Core\GUI\Tabs</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GUI\Tabs\GameplayTAB.h">
+      <Filter>Core\GUI\Tabs</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Misc\Misc.h">
+      <Filter>Core\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GUI\Tabs\PlayerTAB.h">
+      <Filter>Core\GUI\Tabs</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GUI\Tabs\EntitiesTAB.h">
+      <Filter>Core\GUI\Tabs</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\RiftHTTP\RiftHTTP.h">
+      <Filter>framework\RiftHTTP</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\json\json.hpp">
+      <Filter>framework\json</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\color\color.hpp">
+      <Filter>framework\color</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GUI\Tabs\HooksTAB.h">
+      <Filter>Core\GUI\Tabs</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Utilities\ObjectPool.hpp">
+      <Filter>Core\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GUI\Tabs\ObjectPoolTAB.h">
+      <Filter>Core\GUI\Tabs</Filter>
+    </ClInclude>
+    <ClInclude Include="appdata\il2cpp-api-functions.h">
+      <Filter>appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="appdata\il2cpp-api-functions-ptr.h">
+      <Filter>appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="appdata\il2cpp-functions.h">
+      <Filter>appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="appdata\il2cpp-metadata-version.h">
+      <Filter>appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="appdata\il2cpp-types.h">
+      <Filter>appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="appdata\il2cpp-types-ptr.h">
+      <Filter>appdata</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="appdata">
+      <UniqueIdentifier>{9e8f25e7-0574-4c93-9990-23e3ee08abb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="framework">
+      <UniqueIdentifier>{e0c35eac-7f63-4ded-8579-8f0b95dc2df6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="user">
+      <UniqueIdentifier>{f0c4a1b6-0ee7-4592-91f5-25c4ae6f0490}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{a28daa77-bcb8-4d8b-89d8-8b00e291d0e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Utilities">
+      <UniqueIdentifier>{3b3ad230-1ef4-4a2c-9255-b42c2e0635d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Players">
+      <UniqueIdentifier>{11102146-6bb1-429f-8c9e-a03054fc883e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Settings">
+      <UniqueIdentifier>{2acb7ca0-1162-432b-9624-d66aa3f30c92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="framework\imgui">
+      <UniqueIdentifier>{6bd2e119-c235-4517-90ea-4e58dad4866f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="framework\detours">
+      <UniqueIdentifier>{df58de16-6777-4c02-98ac-81c54a32b3e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Hooks">
+      <UniqueIdentifier>{8451e948-8411-48b3-a49a-191c1672bd73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GUI">
+      <UniqueIdentifier>{0415ac64-a77e-47d3-9024-0516606882b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GUI\Tabs">
+      <UniqueIdentifier>{40f640f4-efbc-4dbd-84bb-1de1c8f34902}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Misc">
+      <UniqueIdentifier>{bcfaccfb-6971-4292-9961-47bf0ea4141f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="framework\RiftHTTP">
+      <UniqueIdentifier>{ab28329d-e016-4075-89a2-397d7ee45381}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="framework\json">
+      <UniqueIdentifier>{6e2fd8f8-47f5-4cbf-a925-7e42befc9726}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="framework\color">
+      <UniqueIdentifier>{048f5fee-fe0b-49b6-adc6-3ad13da90b22}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="version.def" />
+  </ItemGroup>
+</Project>
