@@ -4,7 +4,6 @@
 #include <Windows.h>
 
 #include "json/json.hpp"
-#include "RiftHTTP/RiftHTTP.h"
 
 
 namespace RiftSystem {

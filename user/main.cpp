@@ -17,7 +17,6 @@
 #include <Utilities/Utilities.h>
 #include <UnityResolver.hpp>
 #include <Hooks/InitHooks.h>
-#include "RiftHTTP/RiftHTTP.h"
 #include "json/json.hpp"
 #include "color/color.hpp"
 

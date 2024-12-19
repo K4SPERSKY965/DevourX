@@ -9,8 +9,6 @@
 #include <codecvt>
 #include <iostream>
 #include <fstream>
-#include <wininet.h>
-#pragma comment(lib, "iphlpapi.lib")
 
 using json = nlohmann::json;
 
