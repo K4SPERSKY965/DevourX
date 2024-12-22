@@ -21,7 +21,7 @@ DevourX is a C++-based mod menu specifically designed for the game Devour
   <br>
 
 ## Install
-Copy the [version.dll](https://github.com/jadis0x/DevourX/releases) file to the game's directory and launch the game.
+Copy the [version.dll](https://github.com/jadis0x/DevourX/releases) file to the game's directory and launch the game. Press *F1* to activate the menu.
 
 
 ## Contact
