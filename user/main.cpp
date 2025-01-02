@@ -117,28 +117,7 @@ void Run(LPVOID lpParam)
 		return;
 	}
 
-	app::String* steamName = nullptr;
-
-	
-	if (app::SteamFriends_GetPersonaName != nullptr) {
-		steamName = app::SteamFriends_GetPersonaName(nullptr);
-
-		if (steamName == nullptr) {
-			std::cout << "Steam name retrieval failed, using default value." << std::endl;
-			steamName = ConvertToSystemString("unknown-x-user");
-		}
-	}
-	else {
-		std::cout << "SteamFriends_GetPersonaName function is not available." << std::endl;
-		steamName = ConvertToSystemString("unknown-x-user");
-	}
-
-	app::CSteamID steamUserID = app::SteamUser_GetSteamID(nullptr);
-
-
-	std::cout << "[DevourX]: Logged in as " << steamName << " (" << dye::green(steamUserID.m_SteamID) << ")\n\n";
 	std::cout << "[DevourX]: " << dye::grey("Initializing..\n");
-
 
 	std::string scene = XUtility::SceneName();
 

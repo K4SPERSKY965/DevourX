@@ -46,7 +46,7 @@ namespace RiftSystem {
 namespace RiftConfig {
 	// Singleton için erişim fonksiyonu
 	ConfigReader& ConfigReader::getInstance(const std::string& fileName) {
-		static ConfigReader instance(fileName);  // İlk oluşturulduğunda, sonraki çağrılarda aynı örnek kullanılır.
+		static ConfigReader instance(fileName);
 		return instance;
 	}
 
@@ -95,7 +95,7 @@ namespace RiftConfig {
 	void ConfigReader::createDefaultConfig() {
 		config["gameVersion"] = "1.0.0"; // default value
 		config["modVersion"] = "1.0.0";  // default value
-		config["injectDelay"] = 10;      // default value
+		config["injectDelay"] = 8;      // default value
 		saveConfig();
 		std::cout << "[RiftLoader]: " << configFileName << " created." << std::endl;
 	}
