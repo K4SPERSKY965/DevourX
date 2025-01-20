@@ -59,7 +59,6 @@ app::String* ConvertToSystemString(const char* str)
     return reinterpret_cast<app::String*>(il2cpp_str);
 }
 
-
 std::string ToString(app::Object* object)
 {
     std::string type = il2cppi_to_string(app::Object_ToString(object, NULL));

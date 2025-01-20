@@ -9,8 +9,9 @@
 namespace RiftSystem {
     std::filesystem::path getModulePath(HMODULE hModule);
     std::filesystem::path getApplicationPath();
-	std::string WStringToString(const std::wstring& wstr);
 	void ShowMessageBox(const char* msg);
+    bool GameVersionCheck();
+    void HandleError(LPVOID lpParam);
 }
 
 namespace RiftConfig {

@@ -82,7 +82,9 @@ DWORD WINAPI Load(LPVOID lpParam) {
 	if (!version_dll)
 		return 0;
 
-	std::this_thread::sleep_for(std::chrono::seconds(RiftConfig::configReader.getInjectDelay()));
+	auto& configReader = RiftConfig::ConfigReader::getInstance("RiftLoader_config.json");
+
+	std::this_thread::sleep_for(std::chrono::seconds(configReader.getInjectDelay()));
 	Run(lpParam);
 
 	return 0;

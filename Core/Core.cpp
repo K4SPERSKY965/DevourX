@@ -2,11 +2,8 @@
 
 #include "Core.h"
 
-#include <iphlpapi.h>
 #include "Utilities/Utilities.h"
 #include <vector>
-#include <locale>
-#include <codecvt>
 #include <iostream>
 #include <fstream>
 
@@ -26,12 +23,6 @@ namespace RiftSystem {
 		return std::filesystem::path(buff);
 	}
 
-	std::string WStringToString(const std::wstring& wstr)
-	{
-		std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-		return converter.to_bytes(wstr);
-	}
-
 	void ShowMessageBox(const char* msg)
 	{
 		MessageBoxA(
@@ -40,6 +31,25 @@ namespace RiftSystem {
 			"RiftLoader",
 			MB_OK | MB_ICONWARNING
 		);
+	}
+
+	bool GameVersionCheck() {
+		auto modulePath = RiftSystem::getModulePath(NULL);
+		auto gameAssembly = modulePath.parent_path() / "GameAssembly.dll";
+
+		if (!std::filesystem::exists(gameAssembly)) {
+			std::cout << "[DevourX] GameAssembly.dll was not found" << "\n";
+			MessageBox(NULL, L"Unable to locate GameAssembly.dll", L"DevourX", MB_OK | MB_ICONERROR | MB_SYSTEMMODAL);
+			return false;
+		}
+
+		return true;
+	}
+
+	void HandleError(LPVOID lpParam) {
+		fclose(stdout);
+		FreeConsole();
+		FreeLibraryAndExitThread((HMODULE)lpParam, 0);
 	}
 }
 
@@ -89,6 +99,7 @@ namespace RiftConfig {
 		}
 		else {
 			createDefaultConfig();
+			loadConfig(); // load again after the file is created
 		}
 	}
 

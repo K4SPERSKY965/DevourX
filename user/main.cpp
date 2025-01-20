@@ -1,5 +1,4 @@
-﻿// Generated C++ file by Il2CppInspector - http://www.djkaty.com - https://github.com/djkaty
-// Custom injected code entry point
+﻿// Custom injected code entry point
 
 #include "pch-il2cpp.h"
 
@@ -22,73 +21,60 @@
 
 using json = nlohmann::json;
 
-// Set the name of your log file here
 extern const LPCWSTR LOG_FILE = L"RiftLoader-DevourX.txt";
 
 HMODULE hModule;
 HANDLE hUnloadEvent;
 
-void MonitorUnloadKey()
-{
-	while (!XGlobalUtility::bUnhook) {
-		if (GetAsyncKeyState(VK_F12) & 0x8000) {
-			XGlobalUtility::bUnhook = true;
+DWORD WINAPI MonitorUnload(LPVOID) {
+	while (true) {
+		if (GetAsyncKeyState(VK_F12) & 0x8000) { // Check if F12 is pressed
+			SetEvent(hUnloadEvent); // Trigger unload event
 			break;
 		}
-		std::this_thread::sleep_for(std::chrono::seconds(1));
+		std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	}
-}
-
-
-bool GameVersionCheck() {
-	auto modulePath = RiftSystem::getModulePath(NULL);
-	auto gameAssembly = modulePath.parent_path() / "GameAssembly.dll";
-
-	if (!std::filesystem::exists(gameAssembly)) {
-		std::cout << "[DevourX] GameAssembly.dll was not found" << "\n";
-		MessageBox(NULL, L"Unable to locate GameAssembly.dll", L"DevourX", MB_OK | MB_ICONERROR | MB_SYSTEMMODAL);
-		return false;
-	}
-
-	return true;
-}
-
-DWORD __stdcall EjectThread(LPVOID lpParameter) {
-	std::this_thread::sleep_for(std::chrono::milliseconds(500));
-	DetourUninitialization();
-	fclose(stdout);
-	FreeConsole();
-	CloseHandle(hUnloadEvent);
-	FreeLibraryAndExitThread(hModule, 0);
+	return 0;
 }
 
 // Custom injected code entry point
 void Run(LPVOID lpParam)
 {
 	hModule = (HMODULE)lpParam;
-	init_il2cpp();
+	auto& configReader = RiftConfig::configReader;
 
-	if (!GameVersionCheck()) {
-		fclose(stdout);
-		FreeConsole();
-		FreeLibraryAndExitThread((HMODULE)lpParam, 0);
+	// If you would like to output to a new console window, use il2cppi_new_console() to open one and redirect stdout
+	il2cppi_new_console();
+	SetConsoleTitleA("RiftSystems::DevourX");
+
+	if (!RiftSystem::GameVersionCheck()) {
+		RiftSystem::HandleError(lpParam);
 		return;
 	}
 
 	if (!IsWindows10OrGreater())
 	{
-		MessageBoxA(NULL, "You need at least Windows 10.", "RiftLoader::DevourX - Version Not Supported", MB_OK);
+		MessageBoxA(NULL, "You need at least Windows 10.", "[RiftSystems]::DevourX - Version Not Supported", MB_OK);
+		RiftSystem::HandleError(lpParam);
+		return;
 	}
 
+	init_il2cpp();
+
 	hUnloadEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
+	if (hUnloadEvent == NULL) {
+		std::cout << "[RiftSystems]: " << dye::red("Failed to create unload event! Error code: ") << GetLastError() << std::endl;
+		RiftSystem::HandleError(lpParam);
+		return;
+	}
+
+	// Unload izleyicisini başlat
+	std::thread unloadMonitorThread(MonitorUnload, nullptr);
+	unloadMonitorThread.detach();
 
 	il2cpp_thread_attach(il2cpp_domain_get());
 
-	// If you would like to output to a new console window, use il2cppi_new_console() to open one and redirect stdout
-	il2cppi_new_console();
-	SetConsoleTitleA("RiftLoader::DevourX");
-
-	RiftConfig::configReader.setModVersion("3.0.4");
+	configReader.setModVersion("3.0.4");
 
 	static UnityAPI::UApplication uApp;
 	static UnityAPI::UObject uMenu;
@@ -101,8 +87,8 @@ void Run(LPVOID lpParam)
 	std::cout << "\tGame Version: " << dye::green(gameVersion) << std::endl;
 	std::cout << "\tUnity Version: " << dye::green(unityVersion) << "\n\n";
 
-	std::string currentModVersion = RiftConfig::configReader.getModVersion();
-	RiftConfig::configReader.setGameVersion(gameVersion);
+	std::string currentModVersion = configReader.getModVersion();
+	configReader.setGameVersion(gameVersion);
 
 	std::cout << "\tDevourX " << dye::aqua("v" + currentModVersion) << "\n";
 	std::cout << "\t" << dye::grey(__TIME__) << "\n\n";
@@ -110,31 +96,38 @@ void Run(LPVOID lpParam)
 	std::cout << dye::red("\tDeveloped by Jadis0x\n\n");
 
 	std::cout << dye::grey("[DevourX]: Github: https://github.com/jadis0x\n");
-	std::cout << dye::grey("[DevourX]: Web Site: https://www.luridlane.com\n\n");
 
 	if (!XUtility::IsSteamRunning()) {
 		XUtility::WarnAndQuit("Steam is not running!");
 		return;
 	}
 
-	std::cout << "[DevourX]: " << dye::grey("Initializing..\n");
+	std::cout << "[DevourX]: " << dye::green("Cheat initialized. Press F1 to open the menu, F12 to unload...\n");
 
 	std::string scene = XUtility::SceneName();
 
 	if (scene == std::string("Menu")) {
-		MessageBoxA(
-			NULL,
-			"Be cautious when using the Object Pool menu. I’ve added it as a preview feature. A single wrong click could cause the game to crash.\n\n\nDiscord: Jadis0x",
-			"Message From DevourX",
-			MB_OK | MB_ICONWARNING
-		);
+		std::cout << dye::red("\n\n******************************\n");
+		std::cout << dye::red("Be cautious when using the Object Pool menu. I've added it as a preview feature. A single wrong click could cause the game to crash.") << std::endl;
+		std::cout << dye::red("******************************\n\n");
 	}
-
 
 	DetourInitilization();
 
-	std::thread UnloadKeyThread(MonitorUnloadKey);
-	UnloadKeyThread.join();
+	while (true) {
+		// Check shutdown request
+		if (WaitForSingleObject(hUnloadEvent, 100) == WAIT_OBJECT_0) {
+			std::cout << "[RiftSystems]: " << dye::red("Unload event detected, shutting down...\n") << std::endl;
+			break; // End the loop
+		}
 
-	CreateThread(0, 0, EjectThread, 0, 0, 0);
+		std::this_thread::sleep_for(std::chrono::milliseconds(500)); // Relax the CPU :D
+	}
+
+	// Cleanup resources
+	DetourUninitialization();
+	fclose(stdout);
+	FreeConsole();
+	CloseHandle(hUnloadEvent);
+	FreeLibraryAndExitThread(hModule, 0);
 }
