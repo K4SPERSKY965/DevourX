@@ -22,7 +22,7 @@ namespace Players {
             }
         }
 
-        UnityAPI::UObject uObj("Assembly-CSharp.dll");
+        static UnityAPI::UObject uObj("Assembly-CSharp.dll");
 
         // Yeni oyuncuların eklenmesi
         app::GameObject__Array* currentGameObjects = uObj.FindGameObjectsWithTag("Player");
@@ -45,7 +45,7 @@ namespace Players {
         playersSet.clear();
         playersList.clear();
 
-        UnityAPI::UObject uObj("Assembly-CSharp.dll");
+        static UnityAPI::UObject uObj("Assembly-CSharp.dll");
 
         app::GameObject__Array* gameObjects = uObj.FindGameObjectsWithTag("Player");
         if (gameObjects && gameObjects->max_length > 0) {
@@ -74,7 +74,7 @@ namespace LocalPlayer {
         // Eğer cachedLocalPlayer geçersizse, sıfırla ve yenile
         cachedLocalPlayer = nullptr;
 
-        UnityAPI::UObject uObj("Assembly-CSharp.dll");
+        static UnityAPI::UObject uObj("Assembly-CSharp.dll");
 
         const std::vector<app::GameObject*>& playerList = Players::GetPlayers();
         for (auto& currentPlayer : playerList) {
@@ -101,7 +101,7 @@ namespace LocalPlayer {
             return nullptr;
         }
 
-        UnityAPI::UObject uObj("Assembly-CSharp.dll");
+        static UnityAPI::UObject uObj("Assembly-CSharp.dll");
 
         app::Component* nbComponent = uObj.GetComponentByName(localPlayer, "NolanBehaviour");
         if (nbComponent != nullptr && !XUtility::IsNull((app::Object_1*)nbComponent)) {
