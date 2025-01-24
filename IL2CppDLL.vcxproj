@@ -219,7 +219,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <TargetName>version</TargetName>
-    <OutDir>D:\SteamLibrary\steamapps\common\Devour</OutDir>
+    <OutDir>.\Builds\Debug</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>

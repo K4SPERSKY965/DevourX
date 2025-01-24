@@ -2,3 +2,7 @@
 /.vs
 /DevourX/x64
 /Builds/Release
+/DevourX.NET/obj
+/DevourX.NET/bin
+/Builds
+/DevourX.NET/References
