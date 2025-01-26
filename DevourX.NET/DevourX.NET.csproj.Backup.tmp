@@ -10,8 +10,4 @@
     <Folder Include="References\" />
   </ItemGroup>
 
-  <ItemGroup>
-    
-  </ItemGroup>
-
 </Project>
