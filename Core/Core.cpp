@@ -51,6 +51,11 @@ namespace RiftSystem {
 		FreeConsole();
 		FreeLibraryAndExitThread((HMODULE)lpParam, 0);
 	}
+
+	bool IsValidPointer(void* ptr)
+	{
+		return (ptr != nullptr) && !IsBadReadPtr(ptr, sizeof(void*));
+	}
 }
 
 namespace RiftConfig {

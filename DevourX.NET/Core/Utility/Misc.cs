@@ -1,6 +1,7 @@
 ﻿using Il2Cpp;
 using Il2CppOpsive.UltimateCharacterController.Character;
 using Il2CppPhoton.Bolt;
+using Il2CppUdpKit.Platform.Photon;
 using UnityEngine;
 
 namespace DevourX.NET.Core.Utility
@@ -166,6 +167,35 @@ namespace DevourX.NET.Core.Utility
             Vector3 spawnPosition = origin + forwardDirection * spawnDistance;
 
             BoltNetwork.Instantiate(prefab, spawnPosition, Quaternion.identity);
+        }
+
+        public static void CreateCustomizedLobby(PhotonRegion.Regions region, int serverConnectionLimit = 4, bool isPrivate = false)
+        {
+            Il2CppHorror.Menu HorrorMenu = UnityEngine.Object.FindObjectOfType<Il2CppHorror.Menu>();
+            if (HorrorMenu == null) return;
+
+            GameObject localPlayer = PlayerManager.Instance.GetLocalPlayer();
+
+            // if the player is not in the lobby
+            if (!localPlayer)
+            {
+                PhotonRegion _region = PhotonRegion.GetRegion(region);
+                HorrorMenu.SetUDPPlatform(_region);
+
+                BoltConfig __config = HorrorMenu.boltConfig;
+
+                UnityEngine.UI.Toggle __toggle = HorrorMenu.hostPrivateServer;
+
+                __toggle.isOn = isPrivate;
+                __config.serverConnectionLimit = serverConnectionLimit;
+
+
+                BoltLauncher.StartServer(__config, null);
+
+                HorrorMenu.ShowCanvasGroup(HorrorMenu.loadingCanvasGroup, true);
+                HorrorMenu.ShowCanvasGroup(HorrorMenu.hostCanvasGroup, false);
+                HorrorMenu.ShowCanvasGroup(HorrorMenu.mainMenuCanvasGroup, false);
+            }
         }
     }
 }

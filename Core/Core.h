@@ -12,6 +12,7 @@ namespace RiftSystem {
 	void ShowMessageBox(const char* msg);
     bool GameVersionCheck();
     void HandleError(LPVOID lpParam);
+    bool IsValidPointer(void* ptr);
 }
 
 namespace RiftConfig {

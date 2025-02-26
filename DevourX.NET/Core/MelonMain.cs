@@ -1,6 +1,7 @@
 ﻿using DevourX.NET.Core.Utility;
 using Il2Cpp;
 using Il2CppPhoton.Bolt;
+using Il2CppUdpKit.Platform.Photon;
 using MelonLoader;
 using UnityEngine;
 using static Il2Cpp.IngameStatsTracker;
@@ -33,6 +34,7 @@ namespace DevourX.NET.Core
         private ObjectPool? selectedPool = null; // SELECTED PREFAB
         private Vector2 poolScrollPosition;
 
+        private int lobbyLimitInput = 4;
 
         public void Start()
         {
@@ -255,7 +257,7 @@ namespace DevourX.NET.Core
             {
                 if (GUILayout.Button(pool.DisplayName, GUILayout.Width(350)))
                 {
-                    selectedPool = pool; 
+                    selectedPool = pool;
                     Debug.Log($"Selected: {pool.DisplayName}");
                 }
             }
@@ -343,15 +345,14 @@ namespace DevourX.NET.Core
             // show current toggle key
             GUILayout.Label($"<b>Menu Toggle Key (Current):</b> <color=#e8ff91>{Settings.Settings.bMenuToggleKey.ToString()}</color>");
 
-            menuToggleKeyInput = GUILayout.TextField(menuToggleKeyInput ?? Settings.Settings.bMenuToggleKey.ToString());
+            menuToggleKeyInput = GUILayout.TextField(menuToggleKeyInput ?? Settings.Settings.bMenuToggleKey.ToString().ToUpper());
 
             if (GUILayout.Button("Set Menu Toggle Key"))
             {
-                // Giriş metnini KeyCode'a çevir ve kontrol et
                 if (System.Enum.TryParse(menuToggleKeyInput, out KeyCode newKey))
                 {
                     Settings.Settings.bMenuToggleKey = newKey;
-                    feedbackMessage = $"<color=#56da7b>Menu toggle key updated to: {newKey}</color>";
+                    feedbackMessage = $"<color=#56da7b>Menu toggle key updated to: {newKey.ToString().ToUpper()}</color>";
                 }
                 else
                 {
@@ -372,13 +373,32 @@ namespace DevourX.NET.Core
         private void ShowGameplayTab()
         {
             GUILayout.Label("<color=#788686>Gameplay</color>");
-            
+
             GUILayout.Space(10);
 
             if (GUILayout.Button("Force Lobby Start"))
             {
                 Utility.Misc.ForceLobbyStart();
             }
+
+            GUILayout.Space(20);
+            GUILayout.BeginVertical(GUILayout.Width(250));
+
+            GUILayout.Label("<color=#53ff79>Connection Limit:</color>");
+            string input = GUILayout.TextField(lobbyLimitInput.ToString(), GUILayout.Width(90));
+            GUILayout.Space(10);
+            if (int.TryParse(input, out int parsedLimit))
+            {
+                lobbyLimitInput = parsedLimit;
+            }
+
+            if (GUILayout.Button("Create Customized Lobby", GUILayout.Width(190)))
+            {
+                Utility.Misc.CreateCustomizedLobby(PhotonRegion.Regions.BEST_REGION, lobbyLimitInput);
+            }
+
+            GUILayout.EndVertical();
+            GUILayout.Space(20);
 
             if (GUILayout.Button($"Enable Movement: <color={(Settings.Settings.enableMovement ? "green" : "#cb5b5f")}>{Settings.Settings.enableMovement}</color>"))
             {
@@ -393,7 +413,7 @@ namespace DevourX.NET.Core
             Settings.Settings.disableLongInteract = GUILayout.Toggle(Settings.Settings.disableLongInteract, "Disable Long Interact");
 
             GUILayout.Space(15);
-           
+
             Settings.Settings.fastMovement = GUILayout.Toggle(Settings.Settings.fastMovement, $"Fast Movement: <color={(Settings.Settings.fastMovement ? "green" : "#cb5b5f")}>{Settings.Settings.fastMovement}</color>");
             GUILayout.Label($"<b>Movement Speed Multiplier:</b> <color=#fff>{Settings.Settings.fastMovementMultiplier:F0}</color>");
             Settings.Settings.fastMovementMultiplier = GUILayout.HorizontalSlider(Settings.Settings.fastMovementMultiplier, 1.1f, 15f, GUILayout.Width(300));
