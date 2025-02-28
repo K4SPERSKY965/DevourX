@@ -5,7 +5,7 @@ namespace DevourX.NET.Core.Settings
     public class Settings
     {
         public static bool bShowMenu { get; set; } = false;
-        public static KeyCode bMenuToggleKey { get; set; } = KeyCode.F12;
+        public static KeyCode bMenuToggleKey { get; set; } = KeyCode.Q;
         public static readonly float menuWidthPercentage = 0.3f;  // Menu width is 30% of the screen width
         public static readonly float menuHeightPercentage = 0.8f; // Menu height is 80% of the screen height
 

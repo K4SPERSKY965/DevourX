@@ -4,6 +4,7 @@ using Il2CppPhoton.Bolt;
 using Il2CppUdpKit.Platform.Photon;
 using UnityEngine;
 
+
 namespace DevourX.NET.Core.Utility
 {
     public class Misc
@@ -189,12 +190,32 @@ namespace DevourX.NET.Core.Utility
                 __toggle.isOn = isPrivate;
                 __config.serverConnectionLimit = serverConnectionLimit;
 
-
                 BoltLauncher.StartServer(__config, null);
 
                 HorrorMenu.ShowCanvasGroup(HorrorMenu.loadingCanvasGroup, true);
                 HorrorMenu.ShowCanvasGroup(HorrorMenu.hostCanvasGroup, false);
                 HorrorMenu.ShowCanvasGroup(HorrorMenu.mainMenuCanvasGroup, false);
+            }
+        }
+
+        public static void AttachPetToPlayers(string petName, List<GameObject> players)
+        {
+            for(int i = 0; i < players.Count; i++)
+            {
+                if (players[i] == null) return;
+
+                // PetSpider
+                // PetCat
+                // ..
+
+                PetLoader petLoader = players[i].GetComponent<NolanBehaviour>().petLoader;
+
+                if(petLoader.GetPet() == null)
+                {
+                    petLoader.LoadPet(petName);
+                    petLoader.ResetPet();
+                    petLoader.GetPet();
+                }
             }
         }
     }

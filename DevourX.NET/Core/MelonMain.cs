@@ -179,12 +179,20 @@ namespace DevourX.NET.Core
 
         private void ShowPlayersTab()
         {
-            var players = PlayerManager.Instance.GetAllPlayers();
+            List<GameObject> players = PlayerManager.Instance.GetAllPlayers();
 
             GUILayout.Label($"<color=#788686>Players</color> ({players.Count.ToString()})", new GUIStyle { richText = true });
             GUILayout.Space(5);
 
             playerTABScrollPosition = GUILayout.BeginScrollView(playerTABScrollPosition, GUILayout.Width(420), GUILayout.Height(400));
+
+            if (BoltNetwork.IsServer)
+            {
+                if (GUILayout.Button("[FORCE] Attach pet to players"))
+                {
+                    Utility.Misc.AttachPetToPlayers("PetCat", players);
+                }
+            }
 
             if (players.Count == 0)
             {

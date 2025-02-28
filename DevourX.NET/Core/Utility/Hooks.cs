@@ -40,6 +40,7 @@ namespace DevourX.NET.Core.Utility
             }
         }
 
+
         [HarmonyPatch(typeof(DevourInput), "GetLongPress")]
         static class DevourInput_GetLongPress_Patch
         {
