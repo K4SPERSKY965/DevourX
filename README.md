@@ -15,6 +15,8 @@
 - Fly
 - Kill/Revive Players
 - Trigger a Jumpscare for the Selected Player
+- Create a custom lobby with unlimited players
+- Force attach any pet to players
 
   and more..
 
@@ -23,7 +25,6 @@
 
 **<p>Download the Source</p>**
 - Grab the repo or a ZIP of the project. If you don't want to deal with this, [click here](https://github.com/jadis0x/DevourX/releases)
-
 
 
 
