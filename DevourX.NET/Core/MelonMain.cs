@@ -35,6 +35,11 @@ namespace DevourX.NET.Core
         private Vector2 poolScrollPosition;
 
         private int lobbyLimitInput = 4;
+        private PhotonRegion.Regions selectedRegion = PhotonRegion.Regions.BEST_REGION; // default region
+        private bool bestRegionChecked = true; // default selected
+        private bool euChecked = false;
+        private bool usChecked = false;
+        private bool asiaChecked = false;
 
         public void Start()
         {
@@ -394,15 +399,64 @@ namespace DevourX.NET.Core
 
             GUILayout.Label("<color=#53ff79>Connection Limit:</color>");
             string input = GUILayout.TextField(lobbyLimitInput.ToString(), GUILayout.Width(90));
+
             GUILayout.Space(10);
             if (int.TryParse(input, out int parsedLimit))
             {
                 lobbyLimitInput = parsedLimit;
             }
 
+            GUILayout.Label("<color=#53ff79>Select Region:</color>");
+            GUILayout.BeginVertical();
+
+            // checkbox control
+            if (GUILayout.Toggle(bestRegionChecked, "Best Region") != bestRegionChecked)
+            {
+                bestRegionChecked = !bestRegionChecked;
+                if (bestRegionChecked)
+                {
+                    selectedRegion = PhotonRegion.Regions.BEST_REGION;
+                    euChecked = usChecked = asiaChecked = false; // reset others
+                }
+            }
+
+            if (GUILayout.Toggle(euChecked, "EU") != euChecked)
+            {
+                euChecked = !euChecked;
+                if (euChecked)
+                {
+                    selectedRegion = PhotonRegion.Regions.EU;
+                    bestRegionChecked = usChecked = asiaChecked = false; // reset others
+                }
+            }
+
+            if (GUILayout.Toggle(usChecked, "US") != usChecked)
+            {
+                usChecked = !usChecked;
+                if (usChecked)
+                {
+                    selectedRegion = PhotonRegion.Regions.US;
+                    bestRegionChecked = euChecked = asiaChecked = false; // reset others
+                }
+            }
+
+            if (GUILayout.Toggle(asiaChecked, "Asia") != asiaChecked)
+            {
+                asiaChecked = !asiaChecked;
+                if (asiaChecked)
+                {
+                    selectedRegion = PhotonRegion.Regions.ASIA;
+                    bestRegionChecked = euChecked = usChecked = false; // reset others
+                }
+            }
+
+            GUILayout.EndVertical();
+
+            // Custom lobby oluşturma butonu
             if (GUILayout.Button("Create Customized Lobby", GUILayout.Width(190)))
             {
-                Utility.Misc.CreateCustomizedLobby(PhotonRegion.Regions.BEST_REGION, lobbyLimitInput);
+                Utility.Misc.CreateCustomizedLobby(selectedRegion, lobbyLimitInput);
+                MelonLogger.Warning($"Custom lobby created! Region: {selectedRegion}, Limit: {lobbyLimitInput}");
             }
 
             GUILayout.EndVertical();

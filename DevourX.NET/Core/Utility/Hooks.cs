@@ -1,9 +1,9 @@
-﻿using DevourX.NET.Core.Settings;
-using HarmonyLib;
+﻿using HarmonyLib;
 using Il2Cpp;
-using Il2CppBehaviorDesigner.Runtime.Tasks.UltimateCharacterController;
 using MelonLoader;
 using UnityEngine;
+using Il2CppHorror;
+using UnityEngine.Events;
 
 namespace DevourX.NET.Core.Utility
 {
@@ -53,6 +53,88 @@ namespace DevourX.NET.Core.Utility
                 }
 
                 return true;
+            }
+        }
+
+        [HarmonyPatch(typeof(Il2CppHorror.Menu), "SetupOutfit")]
+        static class Menu_SetupOutfit_Patch
+        {
+            [HarmonyPrefix]
+            static bool Prefix(Il2CppHorror.Menu __instance, CharacterOutfit outfit)
+            {
+                if (outfit != null)
+                {
+                    if (!outfit.isOwned)
+                    {
+                        UnlockOutfit(outfit); 
+                    }
+                }
+                return true;
+            }
+
+            static void UnlockOutfit(CharacterOutfit outfit)
+            {
+                MelonLogger.Warning($"Unlocking outfit: {outfit.addressableName}");
+
+                outfit.isOwned = true;
+                outfit.isSupporter = true;
+            }
+        }
+
+        
+        [HarmonyPatch(typeof(Il2Cpp.SurvivalLobbyController), "OnSelectOutfit")]
+        static class SurvivalLobbyController_OnSelectOutfit_Patch
+        {
+            [HarmonyPrefix]
+            static bool Prefix(Il2Cpp.SurvivalLobbyController __instance, CharacterOutfit outfit)
+            {
+                if (outfit != null)
+                {
+                    if (!outfit.isOwned)
+                    {
+                        UnlockOutfit(outfit);
+                    }
+                }
+                return true;
+            }
+
+            static void UnlockOutfit(CharacterOutfit outfit)
+            {
+                MelonLogger.Warning($"[lobby] Unlocking outfit: {outfit.addressableName}");
+
+                outfit.isOwned = true;
+                outfit.isSupporter = true;
+            }
+        }
+
+        [HarmonyPatch(typeof(Il2Cpp.SurvivalLobbyController), "LobbyIsFull")]
+        static class SurvivalLobbyController_LobbyIsFull_Patch
+        {
+            [HarmonyPrefix]
+            static bool Prefix(Il2Cpp.SurvivalLobbyController __instance, ref bool __result)
+            {
+                __result = false;
+                return false;
+            }
+        }
+
+
+        // TEST HOOK !!
+        [HarmonyPatch(typeof(Menu), "ShowPublicServerWarningModal")]
+        public class ShowPublicServerWarningModalPatch
+        {
+            // Prefix metodu: Orijinal metod çalışmadan önce devreye girer
+            [HarmonyPrefix]
+            public static bool Prefix(Menu __instance, UnityAction yesAction)
+            {
+                MelonLogger.Msg("ShowPublicServerWarningModal blocked!");
+                return false; 
+            }
+
+            [HarmonyPostfix]
+            public static void Postfix(Menu __instance, UnityAction yesAction)
+            {
+                MelonLogger.Msg("ShowPublicServerWarningModal called.");
             }
         }
 
